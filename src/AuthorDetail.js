@@ -1,37 +1,45 @@
-import React from 'react'
+import React, { Component } from "react";
 
-const AuthorDetail = props => {
 
-<div className="author col-xs-10">
-    <div>
-        <h3>I SHOULD BE AN AUTHOR NAME</h3>
-        <img src="http://catchingfire.ca/wp-content/uploads/2016/09/question-mark-square-01.png" className="img-thumbnail" alt="I SHOULD BE AN AUTHOR NAME TOO"/>
-    </div>
-    <table className='mt-3 table'>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Authors</th>
-                <th>Color</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>I SHOULD BE A BOOK NAME</td>
-                <td>I SHOULD BE  THE AUTHOR OF THIS BOOK</td>
-                <td>
-                    <button className="btn" style={{backgroundColor: "blue"}}/>
-                </td>
-            </tr>
-            <tr>
-                <td>I SHOULD BE ANOTHER BOOK NAME</td>
-                <td>I SHOULD BE A STRING OF THIS OTHER BOOK'S AUTHORS</td>
-                <td>
-                    <button className="btn" style={{backgroundColor: "red"}}/>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-};
+class AuthorDetail extends Component {
+
+
+    books = this.props.author.books.map(book => (
+
+        <tr key={book.title}>
+            <td>{book.title}</td>
+            <td>{` ${this.props.author.first_name} ${this.props.author.last_name}`}</td>
+            <td>
+                <button className="btn" style={{ backgroundColor: book.color }} />
+            </td>
+        </tr>
+
+    ));
+
+    render() {
+        return (
+            <div className="author col-xs-10">
+                <div>
+                    <h3>{this.props.author.first_name} {this.props.author.last_name}</h3>
+                    <img src={this.props.author.imageUrl} className="img-thumbnail" />
+                </div>
+                <table className='mt-3 table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Authors</th>
+                            <th>Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {this.books}
+
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+}
+
 export default AuthorDetail;
